@@ -6,10 +6,10 @@ class DjangoDynamoDBBossConfig(AppConfig):
     name = 'django_dynamodb_boss'
 
     def ready(self):
-        # replace the dynamodb_boss.conf.settings instance with the
-        #   django.conf.settings instance
         from django.conf import settings
-        from dynamodb_boss import conf
-        conf.settings = settings
+        if not settings.hasattr('DYNAMODB_SESSIONS_POOL_NAME'):
+            settings.DYNAMODB_SESSIONS_POOL_NAME = 'default'
+        if not settings.hasattr('DYNAMODB_SESSIONS_TABLE_NAME'):
+            settings.DYNAMODB_SESSIONS_TABLE_NAME = 'sessions'
 
 
