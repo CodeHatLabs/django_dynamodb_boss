@@ -8,7 +8,7 @@ class DynamoDBBossMiddleware(MiddlewareMixin):
     def process_request(self, request):
         request.dynamodb_boss = GetPool().Get()
 
-    def process_response(self, request):
+    def process_response(self, request, response):
         GetPool().Release(request.dynamodb_boss)
 
 
