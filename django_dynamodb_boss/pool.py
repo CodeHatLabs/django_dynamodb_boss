@@ -6,7 +6,7 @@ from dynamodb_boss.boss import DynamoDBBossPool
 def GetPool(name='default'):
     if not name in GetPool.pool:
         pooldef = settings.DYNAMODB_BOSS_POOLS[name]
-        GetPool.pool[name] = DynamoDBBossPool(**pooldef)
+        GetPool.pool[name] = DynamoDBBossPool(
             pooldef['AWS_ACCESS_KEY_ID'],
             pooldef['AWS_SECRET_ACCESS_KEY'],
             pooldef['REGION_NAME'],
