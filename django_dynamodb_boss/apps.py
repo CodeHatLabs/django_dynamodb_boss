@@ -7,9 +7,9 @@ class DjangoDynamoDBBossConfig(AppConfig):
 
     def ready(self):
         from django.conf import settings
-        if not settings.hasattr('DYNAMODB_SESSIONS_POOL_NAME'):
+        if not hasattr(settings, 'DYNAMODB_SESSIONS_POOL_NAME'):
             settings.DYNAMODB_SESSIONS_POOL_NAME = 'default'
-        if not settings.hasattr('DYNAMODB_SESSIONS_TABLE_NAME'):
+        if not hasattr(settings, 'DYNAMODB_SESSIONS_TABLE_NAME'):
             settings.DYNAMODB_SESSIONS_TABLE_NAME = 'sessions'
 
 
