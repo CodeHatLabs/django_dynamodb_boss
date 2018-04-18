@@ -16,3 +16,13 @@ def GetPool(name='default'):
 GetPool.pool = {}
 
 
+def GetBoss(pool_name=None):
+    pool = GetPool(pool_name)
+    return pool.Get()
+
+
+def ReleaseBoss(boss, pool_name=None):
+    pool = GetPool(pool_name)
+    pool.Release(boss)
+
+
