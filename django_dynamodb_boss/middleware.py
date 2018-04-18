@@ -1,12 +1,12 @@
 from django.utils.deprecation import MiddlewareMixin
 from django.utils.functional import SimpleLazyObject
 
-from dynamodb_boss.boss import dynamodb_boss_pool
+from django_dynamodb_boss.pool import GetPool
 
 
 class DynamoDBBossMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
-        request.dynamodb_boss = SimpleLazyObject(lambda: dynamodb_boss_pool.Get())
+        request.dynamodb_boss = SimpleLazyObject(lambda: GetPool())
 
 
