@@ -7,6 +7,8 @@ from botocore.exceptions import ClientError
 from boto3.dynamodb.conditions import Attr as DynamoConditionAttr
 from boto3.session import Session as Boto3Session
 
+from django_dynamodb_boss.pool import GetPool
+
 
 PARTITION_KEY_NAME = getattr(
     settings, 'DYNAMODB_SESSIONS_TABLE_PARTITION_KEY_NAME', 'session_key')
@@ -20,10 +22,9 @@ class SessionStore(SessionBase):
     Implements DynamoDB session store.
     """
     def __init__(self, session_key=None):
-        from dynamodb_boss.boss import dynamodb_boss_pool
         super(SessionStore, self).__init__(session_key)
         self._table = None
-        self._dynamodb_boss_pool = dynamodb_boss_pool
+        self._dynamodb_boss_pool = GetPool(settings.DYNAMODB_SESSIONS_POOL_NAME)
 
     def load(self):
         """
